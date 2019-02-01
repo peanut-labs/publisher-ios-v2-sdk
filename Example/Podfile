@@ -1,0 +1,11 @@
+use_frameworks!
+
+target 'PeanutLabs-iOS_Example' do
+  pod 'PeanutLabs-iOS', :path => '../'
+
+  target 'PeanutLabs-iOS_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end
