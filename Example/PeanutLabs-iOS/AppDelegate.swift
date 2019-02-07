@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import PeanutLabs_iOS
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -15,7 +16,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        
+        PeanutLabsManager.default.initialize(with: PeanutLabsConfig(appId: 9145,
+                                                                    appKey: "54dbf08d625158c6d7b055928d6ac0cc",
+                                                                    endUserId: "KonradTester",
+                                                                    programId: "testProgram"))
+        
+        
         return true
     }
 

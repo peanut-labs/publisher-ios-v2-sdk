@@ -14,7 +14,7 @@
             <connections>
                 <outlet property="navigationBar" destination="fty-9b-ouH" id="f8y-yk-rjK"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
-                <outlet property="webView" destination="sWn-J2-nsi" id="ufD-Ug-e0V"/>
+                <outlet property="webView" destination="sWn-J2-nsi" id="dyh-Fg-5uT"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>

@@ -22,6 +22,32 @@ class ViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    @IBAction func onOpenRewardsCenter(_ sender: Any) {
+        
+        peanutLabsManager.presentRewardsCenter(on: self, with: self)
+        
+    }
+    
+}
 
+extension ViewController: PeanutLabsManagerDelegate {
+    
+    func rewardsCenterDidOpen() {
+        print("\(#function)")
+        
+    }
+    
+    func rewardsCenterDidClose() {
+        print("\(#function)")
+        
+    }
+    
+    func peanutLabsManager(faliedWith error: PeanutLabsErrors) {
+        print("\(#function)")
+        
+    }
+    
+    
 }
 
