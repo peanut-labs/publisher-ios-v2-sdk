@@ -12,6 +12,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PeanutLabsContentViewController" customModule="PeanutLabs_iOS" customModuleProvider="target">
             <connections>
+                <outlet property="activityIndicator" destination="WtC-wM-DJF" id="jl3-0N-Frq"/>
+                <outlet property="activityView" destination="OZl-4M-VTZ" id="bji-Cv-i2f"/>
                 <outlet property="navigationBar" destination="fty-9b-ouH" id="f8y-yk-rjK"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
                 <outlet property="webView" destination="sWn-J2-nsi" id="dyh-Fg-5uT"/>
@@ -40,16 +42,34 @@
                         <wkPreferences key="preferences"/>
                     </wkWebViewConfiguration>
                 </wkWebView>
+                <view hidden="YES" alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OZl-4M-VTZ">
+                    <rect key="frame" x="182" y="428" width="50" height="50"/>
+                    <subviews>
+                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="WtC-wM-DJF">
+                            <rect key="frame" x="6.6666666666666572" y="6.6666666666666856" width="37" height="37"/>
+                            <color key="color" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </activityIndicatorView>
+                    </subviews>
+                    <color key="backgroundColor" red="0.19786526260000001" green="0.22099354860000001" blue="0.2427719384" alpha="0.45000000000000001" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstItem="WtC-wM-DJF" firstAttribute="centerX" secondItem="OZl-4M-VTZ" secondAttribute="centerX" id="1lZ-DA-CK6"/>
+                        <constraint firstAttribute="width" secondItem="OZl-4M-VTZ" secondAttribute="height" multiplier="1:1" id="Byo-ZS-Lc1"/>
+                        <constraint firstAttribute="width" constant="50" id="Q3u-bF-Nkj"/>
+                        <constraint firstItem="WtC-wM-DJF" firstAttribute="centerY" secondItem="OZl-4M-VTZ" secondAttribute="centerY" id="WMk-u5-SZd"/>
+                    </constraints>
+                </view>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="sWn-J2-nsi" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" id="F1a-xS-Twh"/>
+                <constraint firstItem="OZl-4M-VTZ" firstAttribute="centerX" secondItem="EZb-13-Tro" secondAttribute="centerX" id="KRu-pd-iNZ"/>
                 <constraint firstAttribute="bottom" secondItem="sWn-J2-nsi" secondAttribute="bottom" id="ekv-1Q-hIg"/>
                 <constraint firstItem="EZb-13-Tro" firstAttribute="top" secondItem="fty-9b-ouH" secondAttribute="top" id="lIT-lb-8Ej"/>
                 <constraint firstItem="sWn-J2-nsi" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="lUt-tp-5Ej"/>
                 <constraint firstItem="fty-9b-ouH" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="nMi-vI-a9b"/>
                 <constraint firstItem="fty-9b-ouH" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" id="s5n-An-q25"/>
                 <constraint firstItem="sWn-J2-nsi" firstAttribute="top" secondItem="fty-9b-ouH" secondAttribute="bottom" id="t5e-pu-sQ0"/>
+                <constraint firstItem="OZl-4M-VTZ" firstAttribute="centerY" secondItem="EZb-13-Tro" secondAttribute="centerY" id="wnv-BE-GjB"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="EZb-13-Tro"/>
         </view>
