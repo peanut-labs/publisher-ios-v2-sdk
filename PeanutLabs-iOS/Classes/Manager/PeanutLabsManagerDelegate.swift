@@ -10,4 +10,5 @@ import Foundation
 public protocol PeanutLabsManagerDelegate: AnyObject {
     func rewardsCenterDidOpen()
     func rewardsCenterDidClose()
+    func peanutLabsManager(faliedWith error: PeanutLabsErrors)
 }

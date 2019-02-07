@@ -23,6 +23,10 @@ public final class PeanutLabsContentViewController: UIViewController {
         super.viewDidLoad()
         webView.navigationDelegate = self
     }
+    
+    internal func loadPage(with url: URL) {
+        
+    }
 
 }
 

@@ -5,10 +5,9 @@
 //  Created by Konrad Winkowski on 2/1/19.
 //
 
-import Foundation
+import UIKit
 
 public final class PeanutLabsManager {
-    
     
     public enum Gender {
         case male
@@ -38,20 +37,14 @@ public final class PeanutLabsManager {
     
     private var customVariables: [String: String] = [:]
     
-    public var endUserId: String?
-    public var appId: String?
-    public var appKey: String?
+    private var config: PeanutLabsConfig?
     
     /** mm-dd-yyyy (ex: 02-05-2019) **/
     public var dob: String?
     /** Use PeanutLabsManager.Gender **/
     public var gender: PeanutLabsManager.Gender?
     /** An alphanumberic value **/
-    public var programId: String?
-    /** The Publisher Name (internal for now) **/
     internal var publisherName: String?
-    
-    
     
     public var isDebug: Bool = false {
         didSet {
@@ -73,7 +66,7 @@ public final class PeanutLabsManager {
             params.append((key: "sex", value: gender.paramValue))
         }
         
-        if let programId = self.programId {
+        if let programId = config?.programId {
             let predicate = NSPredicate(format: "SELF MATCHES %@", "^[a-zA-Z0-9]*$")
             if predicate.evaluate(with: programId) {
                 params.append((key: "program", value: programId))
@@ -97,12 +90,12 @@ public final class PeanutLabsManager {
     }
     
     internal lazy var userId: String? = {
-        guard let endUserId = self.endUserId, let appId = self.appId, let appKey = self.appKey else {
+        guard let endUserId = config?.endUserId, let appId = config?.appId, let appKey = config?.appKey else {
             logger.log(message: """
                         Failed to get 'userId' because one of these required values was not provided
-                        - ensUserId : \(String(describing: self.endUserId)),
-                        appId : \(String(describing: self.appId)),
-                        appKey : \(String(describing: self.appKey))
+                        - ensUserId : \(String(describing: config?.endUserId)),
+                        appId : \(String(describing: config?.appId)),
+                        appKey : \(String(describing: config?.appKey))
                         """, for: .warning)
             return nil
         }
@@ -139,9 +132,17 @@ public final class PeanutLabsManager {
         customVariables[key] = variable
     }
     
+    @objc public func initialize(with config: PeanutLabsConfigWrapper) {
+        initialize(with: config.config)
+    }
+    
+    public func initialize(with config: PeanutLabsConfig) {
+        self.config = config
+    }
+    
     public func presentRewardsCenterOnRoot(with delegate: PeanutLabsManagerDelegate?) {
         guard let rootViewController = UIApplication.shared.keyWindow?.rootViewController else {
-            // TODO: notify delegate of failure
+            delegate?.peanutLabsManager(faliedWith: .noRootViewToPresentOn)
             return
         }
         
@@ -153,10 +154,17 @@ public final class PeanutLabsManager {
     }
     
     public func presentRewardsCenter(on viewController: UIViewController, with delegate: PeanutLabsManagerDelegate?) {
+        
+        guard let introURL = self.introURL else {
+            delegate?.peanutLabsManager(faliedWith: .sdkNotInitialized)
+            return
+        }
+        
         self.delegate = delegate
         
         let rewardsCenter = PeanutLabsContentViewController()
         rewardsCenter.navigationDelegate = self
+        rewardsCenter.loadPage(with: introURL)
         viewController.present(rewardsCenter, animated: true) { [delegate] in
             delegate?.rewardsCenterDidOpen()
         }

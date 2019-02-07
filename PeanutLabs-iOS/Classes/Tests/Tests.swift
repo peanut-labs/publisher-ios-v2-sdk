@@ -51,7 +51,6 @@ internal final class Tests {
         
         plMgr.gender = .male
         plMgr.dob = "02-05-2019"
-        plMgr.programId = "testProgram"
         plMgr.add(customVariable: "test", forKey: "test")
         
         guard let url = plMgr.introURL else {
@@ -89,10 +88,7 @@ internal final class Tests {
     
     private var plMgr: PeanutLabsManager {
         let plMgr = PeanutLabsManager()
-        
-        plMgr.endUserId = "KonradTester"
-        plMgr.appId = "9145"
-        plMgr.appKey = "54dbf08d625158c6d7b055928d6ac0cc"
+        plMgr.initialize(with: PeanutLabsConfig(appId: 9145, appKey: "54dbf08d625158c6d7b055928d6ac0cc", endUserId: "KonradTester", programId: "testProgram"))
         
         return plMgr
     }
