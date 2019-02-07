@@ -8,10 +8,16 @@
 import UIKit
 import WebKit
 
+internal protocol PeanutLabsContentViewNavigationDelegate: AnyObject {
+    func rewardsCenterDidClose()
+}
+
 public final class PeanutLabsContentViewController: UIViewController {
     
     @IBOutlet var navigationBar: UINavigationBar?
     @IBOutlet var webView: WKWebView!
+    
+    internal weak var navigationDelegate: PeanutLabsContentViewNavigationDelegate?
     
     override public func viewDidLoad() {
         super.viewDidLoad()

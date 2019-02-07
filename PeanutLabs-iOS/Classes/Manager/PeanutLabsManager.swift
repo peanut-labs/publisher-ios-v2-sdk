@@ -156,10 +156,18 @@ public final class PeanutLabsManager {
         self.delegate = delegate
         
         let rewardsCenter = PeanutLabsContentViewController()
+        rewardsCenter.navigationDelegate = self
         viewController.present(rewardsCenter, animated: true) { [delegate] in
-            
+            delegate?.rewardsCenterDidOpen()
         }
-        
     }
     
+}
+
+extension PeanutLabsManager: PeanutLabsContentViewNavigationDelegate {
+    func rewardsCenterDidClose() {
+        userId = nil
+        delegate?.rewardsCenterDidClose()
+        delegate = nil
+    }
 }
