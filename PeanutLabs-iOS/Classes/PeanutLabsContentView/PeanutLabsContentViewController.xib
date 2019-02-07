@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
+    <device id="retina6_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -19,18 +19,21 @@
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
-            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fty-9b-ouH">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                    <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                     <color key="backgroundColor" red="0.95075207949999996" green="0.95072358850000005" blue="0.95073974130000005" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="44" id="9NS-Yf-oKC"/>
+                    </constraints>
                     <items>
                         <navigationItem title="Peanut Labs" id="gGu-nN-4Iw"/>
                     </items>
                 </navigationBar>
                 <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sWn-J2-nsi">
-                    <rect key="frame" x="0.0" y="44" width="375" height="623"/>
+                    <rect key="frame" x="0.0" y="88" width="414" height="808"/>
                     <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <wkWebViewConfiguration key="configuration">
                         <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
@@ -41,8 +44,8 @@
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="sWn-J2-nsi" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" id="F1a-xS-Twh"/>
-                <constraint firstItem="fty-9b-ouH" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="F4b-25-MbU"/>
                 <constraint firstAttribute="bottom" secondItem="sWn-J2-nsi" secondAttribute="bottom" id="ekv-1Q-hIg"/>
+                <constraint firstItem="EZb-13-Tro" firstAttribute="top" secondItem="fty-9b-ouH" secondAttribute="top" id="lIT-lb-8Ej"/>
                 <constraint firstItem="sWn-J2-nsi" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="lUt-tp-5Ej"/>
                 <constraint firstItem="fty-9b-ouH" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="nMi-vI-a9b"/>
                 <constraint firstItem="fty-9b-ouH" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" id="s5n-An-q25"/>

@@ -30,7 +30,7 @@ public final class PeanutLabsManager {
     **/
     public static let `default`: PeanutLabsManager = PeanutLabsManager(shouldRunTests: PeanutLabsManager.runTests)
     
-    private static let runTests = true
+    private static let runTests = false
     
     private weak var delegate: PeanutLabsManagerDelegate?
     private let logger = PeanutLabsLogger.default
@@ -162,10 +162,11 @@ public final class PeanutLabsManager {
         
         self.delegate = delegate
         
-        let rewardsCenter = PeanutLabsContentViewController()
+        let rewardsCenter = PeanutLabsContentViewController(nibName: "PeanutLabsContentViewController", bundle: Bundle.init(for: PeanutLabsManager.self))
         rewardsCenter.navigationDelegate = self
-        rewardsCenter.loadPage(with: introURL)
-        viewController.present(rewardsCenter, animated: true) { [delegate] in
+        
+        viewController.present(rewardsCenter, animated: true) { [delegate, rewardsCenter] in
+            rewardsCenter.loadPage(with: introURL)
             delegate?.rewardsCenterDidOpen()
         }
     }

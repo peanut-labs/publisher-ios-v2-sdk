@@ -22,6 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                                                     endUserId: "KonradTester",
                                                                     programId: "testProgram"))
         
+        PeanutLabsManager.default.isDebug = true
         
         return true
     }
