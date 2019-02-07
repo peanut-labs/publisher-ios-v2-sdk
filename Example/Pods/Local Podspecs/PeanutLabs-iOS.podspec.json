@@ -1,0 +1,22 @@
+{
+  "name": "PeanutLabs-iOS",
+  "version": "0.1.0",
+  "summary": "A short description of PeanutLabs-iOS.",
+  "description": "TODO: Add long description of the pod here.",
+  "homepage": "https://github.com/WinkowskiKonrad/PeanutLabs-iOS",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "WinkowskiKonrad": "konrad.winkowski@surveysampling.com"
+  },
+  "source": {
+    "git": "https://github.com/WinkowskiKonrad/PeanutLabs-iOS.git",
+    "tag": "0.1.0"
+  },
+  "platforms": {
+    "ios": "8.0"
+  },
+  "source_files": "PeanutLabs-iOS/Classes/**/*"
+}

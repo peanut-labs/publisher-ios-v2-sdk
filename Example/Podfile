@@ -5,7 +5,6 @@ target 'PeanutLabs-iOS_Example' do
 
   target 'PeanutLabs-iOS_Tests' do
     inherit! :search_paths
-
     
   end
 end

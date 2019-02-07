@@ -7,9 +7,12 @@
 //
 
 import UIKit
+import PeanutLabs_iOS
 
 class ViewController: UIViewController {
 
+    private let peanutLabsManager = PeanutLabsManager.default
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.

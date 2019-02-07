@@ -1,0 +1,6 @@
+framework module PeanutLabs_iOS {
+  umbrella header "PeanutLabs-iOS-umbrella.h"
+
+  export *
+  module * { export * }
+}
