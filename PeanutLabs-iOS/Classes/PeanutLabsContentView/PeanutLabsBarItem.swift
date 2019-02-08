@@ -15,4 +15,5 @@ internal enum BarItemPosition {
 internal struct PeanutLabsBarItem {
     let barItem: UIBarButtonItem
     let position: BarItemPosition
+    let ordinal: Int8
 }

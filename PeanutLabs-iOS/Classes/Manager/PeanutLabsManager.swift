@@ -162,8 +162,7 @@ public final class PeanutLabsManager {
         
         self.delegate = delegate
         
-        let rewardsCenter = PeanutLabsContentViewController(nibName: "PeanutLabsContentViewController", bundle: Bundle.init(for: PeanutLabsManager.self))
-        rewardsCenter.navigationDelegate = self
+        let rewardsCenter = PeanutLabsContentViewController(manager: self, navigationDelegate: self)
         
         viewController.present(rewardsCenter, animated: true) { [delegate, rewardsCenter] in
             rewardsCenter.loadPage(with: introURL)
