@@ -10,10 +10,13 @@ import WebKit
 
 internal protocol PeanutLabsContentViewNavigationDelegate: AnyObject {
     func rewardsCenterDidClose()
+    func handleFailure(error: PeanutLabsErrors)
 }
 
-public final class PeanutLabsContentViewController: UIViewController {
+public final class PeanutLabsContentViewController: UIViewController, PeanutLabsWebNavigationProtocol {
     
+    
+
     @IBOutlet var navigationBar: UINavigationBar?
     @IBOutlet var webView: WKWebView?
     @IBOutlet weak var navbarHeightConstraint: NSLayoutConstraint?
@@ -47,11 +50,17 @@ public final class PeanutLabsContentViewController: UIViewController {
         return PeanutLabsBarItem(barItem: btn, position: .right, ordinal: 0)
     }()
     
-    private lazy var fragments: [String] = {
+    internal lazy var fragments: [String] = {
         return ["offer", "survey", "open"]
     }()
     
-    private var fragment: String?
+    internal var logger: PeanutLabsLogger {
+        return PeanutLabsLogger.default
+    }
+    internal var fragment: String?
+    internal var baseUrl: URL? {
+        return manager?.introURL
+    }
     
     private weak var manager: PeanutLabsManager?
     private weak var navigationDelegate: PeanutLabsContentViewNavigationDelegate?
@@ -74,8 +83,11 @@ public final class PeanutLabsContentViewController: UIViewController {
     }
     
     internal func loadPage(with url: URL) {
-        showLoadingIndicator()
         webView?.load(URLRequest(url: url))
+    }
+    
+    func handleDecidePolicyForFailure(error: PeanutLabsErrors) {
+        navigationDelegate?.handleFailure(error: error)
     }
 
 }
@@ -140,60 +152,18 @@ extension PeanutLabsContentViewController: WKNavigationDelegate {
     public func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
         
         PeanutLabsLogger.default.log(message: "decidePolicyFor", for: .debug)
+  
+        let results = decidePolicyFor(webView: webView, request: navigationAction.request)
         
-        let request = navigationAction.request
-        guard let url = request.url,
-            let hostStr = url.host,
-            hostStr.contains("peanutlabs.com") else {
-                decisionHandler(WKNavigationActionPolicy.allow)
-                showLoadingIndicator()
-                return
+        if results.shouldShowLoadingIndicator == true {
+            showLoadingIndicator()
         }
         
-        
-        if fragments.contains(url.fragment ?? "unknown") {
-            fragment = url.fragment
-            updateNavBarHeight(shouldHide: true)
-            decisionHandler(WKNavigationActionPolicy.cancel)
-            return
+        if let shouldShowNavBar = results.shouldShowNavBar {
+            updateNavBarHeight(shouldHide: !shouldShowNavBar)
         }
         
-        if url.fragment ?? "" == "close" {
-            fragment = nil
-            updateNavBarHeight(shouldHide: false)
-            decisionHandler(WKNavigationActionPolicy.cancel)
-            return
-        }
-        
-        if url.lastPathComponent == "landingPage.php" {
-            updateNavBarHeight(shouldHide: true)
-        } else if url.path == "/userGreeting.php" && !url.pathComponents.contains("mobile_sdk=true") {
-            
-            updateNavBarHeight(shouldHide: false)
-            
-            let langCode = Locale.current.languageCode ?? ""
-            let zlLocale = "zl=\(langCode)"
-            var newUrl = URL(string: PeanutLabsManager.default.introURL?.absoluteString ?? "")
-            
-            if !url.pathComponents.contains(zlLocale) {
-                newUrl?.appendPathComponent("mobile_sdk=true")
-                newUrl?.appendPathComponent("ref=ios_sdk")
-            }
-            
-            guard let unewUrl = newUrl else {
-                
-                return
-            }
-            
-            webView.load(URLRequest(url: unewUrl))
-        
-            decisionHandler(WKNavigationActionPolicy.cancel)
-            return
-            
-        }
-        
-        decisionHandler(WKNavigationActionPolicy.allow)
-        showLoadingIndicator()
+        decisionHandler(results.policy)
     }
     
     public func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {

@@ -25,6 +25,7 @@
 		8337F7BE45ED35CF64DF6F321AAF15AE /* Pods-PeanutLabs-iOS_Tests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 7DCBE63E4BD3E50DFE60BCE50B4D86AD /* Pods-PeanutLabs-iOS_Tests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		ABB5F4618093FB49BFFECE39CE1F48D8 /* Pods-PeanutLabs-iOS_Tests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FAA63C00543B3997E0095F380245A42 /* Pods-PeanutLabs-iOS_Tests-dummy.m */; };
 		E64BCC9C220B701B0069FCCC /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64BCC9B220B701B0069FCCC /* Tests.swift */; };
+		E64BCC9E220DE5440069FCCC /* PeanutLabsWebNavigationProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64BCC9D220DE5440069FCCC /* PeanutLabsWebNavigationProtocol.swift */; };
 		FA11D87C6F67537B3CF7A98D66859C48 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A16F4CFC63FAC439D7A04994F579A03 /* Foundation.framework */; };
 /* End PBXBuildFile section */
 
@@ -86,6 +87,7 @@
 		D30DBABBFCACBE54FE6EE48D2E6D4483 /* Pods-PeanutLabs-iOS_Example-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-PeanutLabs-iOS_Example-dummy.m"; sourceTree = "<group>"; };
 		D5A714F152720A39D6C929CABA4BEFAD /* Pods-PeanutLabs-iOS_Example-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-PeanutLabs-iOS_Example-frameworks.sh"; sourceTree = "<group>"; };
 		E64BCC9B220B701B0069FCCC /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
+		E64BCC9D220DE5440069FCCC /* PeanutLabsWebNavigationProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeanutLabsWebNavigationProtocol.swift; sourceTree = "<group>"; };
 		E6C85DBB407B811FAF472FF829BC321F /* Pods_PeanutLabs_iOS_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PeanutLabs_iOS_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E8AFEF609034925FAF4D48F6A40C67FB /* PeanutLabs-iOS-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "PeanutLabs-iOS-prefix.pch"; sourceTree = "<group>"; };
 		F1AF78F084CE3132EE76DCA08481A1B3 /* PeanutLabs_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PeanutLabs_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -171,6 +173,7 @@
 				07C245C8220B64CF00D4C1C9 /* PeanutLabsManagerDelegate.swift */,
 				07C245E7220C963B00D4C1C9 /* PeanutLabsConfig.swift */,
 				07C245E9220C97EE00D4C1C9 /* PeanutLabsErrors.swift */,
+				E64BCC9D220DE5440069FCCC /* PeanutLabsWebNavigationProtocol.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -470,6 +473,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				07C245D2220B64CF00D4C1C9 /* PeanutLabsManagerDelegate.swift in Sources */,
+				E64BCC9E220DE5440069FCCC /* PeanutLabsWebNavigationProtocol.swift in Sources */,
 				E64BCC9C220B701B0069FCCC /* Tests.swift in Sources */,
 				07C245D1220B64CF00D4C1C9 /* PeanutLabsManager.swift in Sources */,
 				07C245D4220B64CF00D4C1C9 /* String+MD5.swift in Sources */,

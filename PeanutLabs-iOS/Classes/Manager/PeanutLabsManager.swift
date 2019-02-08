@@ -32,8 +32,8 @@ public final class PeanutLabsManager {
     
     private static let runTests = false
     
-    private weak var delegate: PeanutLabsManagerDelegate?
-    private let logger = PeanutLabsLogger.default
+    internal weak var delegate: PeanutLabsManagerDelegate?
+    internal let logger = PeanutLabsLogger.default
     
     private var customVariables: [String: String] = [:]
     
@@ -109,7 +109,7 @@ public final class PeanutLabsManager {
         guard let userId = self.userId else {
             return nil
         }
-        var urlStr = "http://www.peanutlabs.com/userGreeting.php?userId=\(userId)&mobile_sdk=true&ref=ios_sdk"
+        var urlStr = "http://\(PeanutLabsConfig.domain)/userGreeting.php?userId=\(userId)&mobile_sdk=true&ref=ios_sdk"
         
         urlParameters.forEach { (key, value) in urlStr = urlStr + "&\(key)=\(value)" }
         
@@ -177,5 +177,9 @@ extension PeanutLabsManager: PeanutLabsContentViewNavigationDelegate {
         userId = nil
         delegate?.rewardsCenterDidClose()
         delegate = nil
+    }
+    
+    func handleFailure(error: PeanutLabsErrors) {
+        
     }
 }

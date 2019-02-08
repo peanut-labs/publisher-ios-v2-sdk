@@ -10,4 +10,5 @@ import Foundation
 public enum PeanutLabsErrors: Error {
     case sdkNotInitialized
     case noRootViewToPresentOn
+    case internalUrlGeneration
 }
