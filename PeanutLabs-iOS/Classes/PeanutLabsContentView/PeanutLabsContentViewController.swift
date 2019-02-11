@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import WebKit
 
 internal protocol PeanutLabsContentViewNavigationDelegate: AnyObject {
     func rewardsCenterDidClose()
@@ -15,10 +14,12 @@ internal protocol PeanutLabsContentViewNavigationDelegate: AnyObject {
 
 public final class PeanutLabsContentViewController: UIViewController, PeanutLabsWebNavigationProtocol {
     
-    
+    public override var prefersStatusBarHidden: Bool {
+        return true
+    }
 
     @IBOutlet var navigationBar: UINavigationBar?
-    @IBOutlet var webView: WKWebView?
+    @IBOutlet var webView: UIWebView?
     @IBOutlet weak var navbarHeightConstraint: NSLayoutConstraint?
 
     @IBOutlet var activityView: UIView?
@@ -79,11 +80,11 @@ public final class PeanutLabsContentViewController: UIViewController, PeanutLabs
     override public func viewDidLoad() {
         super.viewDidLoad()
         activityView?.layer.cornerRadius = 5.0
-        webView?.navigationDelegate = self
+        webView?.delegate = self
     }
     
     internal func loadPage(with url: URL) {
-        webView?.load(URLRequest(url: url))
+        webView?.loadRequest(URLRequest(url: url))
     }
     
     func handleDecidePolicyForFailure(error: PeanutLabsErrors) {
@@ -150,6 +151,44 @@ private extension PeanutLabsContentViewController {
     }
 }
 
+extension PeanutLabsContentViewController: UIWebViewDelegate {
+    
+    public func webViewDidStartLoad(_ webView: UIWebView) {
+        logger.log(message: "\(#function)", for: .debug)
+    }
+    
+    public func webViewDidFinishLoad(_ webView: UIWebView) {
+        logger.log(message: "\(#function)", for: .debug)
+        hideLoadingIndicator()
+    }
+    
+    public func webView(_ webView: UIWebView, didFailLoadWithError error: Error) {
+        logger.log(message: "\(#function)", for: .debug)
+        hideLoadingIndicator()
+    }
+    
+    public func webView(_ webView: UIWebView, shouldStartLoadWith request: URLRequest, navigationType: UIWebView.NavigationType) -> Bool {
+        logger.log(message: "\(#function)", for: .debug)
+        
+        let results = decidePolicyFor(webView: webView, request: request)
+        
+        if results.shouldShowLoadingIndicator == true {
+            showLoadingIndicator()
+        }
+        
+        if let shouldShowNavBar = results.shouldShowNavBar {
+            updateNavBarHeight(shouldHide: !shouldShowNavBar)
+        }
+        
+        return results.result
+    }
+    
+}
+
+/**
+ Temp removed and switch to UIWebView due to CORS issue with WKWebView
+ **/
+/*
 extension PeanutLabsContentViewController: WKNavigationDelegate {
     
     public func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
@@ -187,3 +226,4 @@ extension PeanutLabsContentViewController: WKNavigationDelegate {
         PeanutLabsLogger.default.log(message: "didStartProvisionalNavigation", for: .debug)
     }
 }
+*/
