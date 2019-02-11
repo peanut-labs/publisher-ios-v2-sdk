@@ -95,6 +95,9 @@ public final class PeanutLabsContentViewController: UIViewController, PeanutLabs
 private extension PeanutLabsContentViewController {
     
     private func showLoadingIndicator() {
+        
+        guard activityView?.isHidden == true else { return }
+        
         activityView?.alpha = 0.0
         activityView?.isHidden = false
         
