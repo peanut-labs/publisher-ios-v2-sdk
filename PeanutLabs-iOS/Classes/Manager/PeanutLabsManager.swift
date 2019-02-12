@@ -182,4 +182,8 @@ extension PeanutLabsManager: PeanutLabsContentViewNavigationDelegate {
     func handleFailure(error: PeanutLabsErrors) {
         
     }
+    
+    func onDone() {
+        
+    }
 }

@@ -9,7 +9,8 @@ import Foundation
 
 public struct PeanutLabsConfig {
    
-    internal static let domain: String = "www.peanutlabs.com"
+    internal static let domain = "www.peanutlabs.com"
+    internal static let title = "Peanut Labs"
     
     internal let version: String = "2.0"
     internal let platform: String = "iOS"

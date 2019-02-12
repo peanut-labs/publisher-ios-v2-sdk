@@ -9,6 +9,7 @@ import UIKit
 
 internal protocol PeanutLabsContentViewNavigationDelegate: AnyObject {
     func rewardsCenterDidClose()
+    func onDone()
     func handleFailure(error: PeanutLabsErrors)
 }
 
@@ -28,14 +29,14 @@ public final class PeanutLabsContentViewController: UIViewController, PeanutLabs
         
     private lazy var doneBarItem: PeanutLabsBarItem = {
         let btn = UIBarButtonItem(title: "Back", style: .plain, target: nil, action: #selector(onDoneButton))
-        return PeanutLabsBarItem(barItem: btn, position: .left, ordinal: 0) 
+        return PeanutLabsBarItem(barItem: btn, position: .left, ordinal: 1)
     }()
     
     private lazy var backBarItem: PeanutLabsBarItem = {
         let btn = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.init(rawValue: 105) ?? .rewind,
                                   target: nil,
                                   action: #selector(onBackButton))
-        return PeanutLabsBarItem(barItem: btn, position: .left, ordinal: 1)
+        return PeanutLabsBarItem(barItem: btn, position: .left, ordinal: 0)
     }()
     
     private lazy var forwardBarItem: PeanutLabsBarItem = {
@@ -122,7 +123,8 @@ private extension PeanutLabsContentViewController {
     }
     
     private func update(navBardWith items: [PeanutLabsBarItem]) {
-        // TODO: add items to 'customNavigationItem' (ex : customNavigationItem?.leftBarButtonItem = items)
+        customNavigationItem?.leftBarButtonItems = items.filter({ $0.position == .left}).sorted(by: { $0.ordinal < $1.ordinal }).map({ $0.barItem })
+        customNavigationItem?.rightBarButtonItems = items.filter({ $0.position == .right}).sorted(by: { $0.ordinal < $1.ordinal }).map({ $0.barItem })
     }
     
     private func updateNavBarHeight(shouldHide: Bool) {
@@ -136,11 +138,14 @@ private extension PeanutLabsContentViewController {
     }
     
     @objc private func onDoneButton() {
-        
+        self.navigationDelegate?.onDone()
     }
     
     @objc private func onRewardCenterButton() {
-        
+        guard let introUrl = baseUrl else {
+            return
+        }
+        loadPage(with: introUrl)
     }
     
     @objc private func onBackButton() {
@@ -160,6 +165,38 @@ extension PeanutLabsContentViewController: UIWebViewDelegate {
     
     public func webViewDidFinishLoad(_ webView: UIWebView) {
         logger.log(message: "\(#function)", for: .debug)
+        
+        var title = PeanutLabsConfig.title
+        
+        if fragment == "offer" || fragment == "survey" {
+            title = fragment?.capitalized ?? ""
+        }
+        
+        customNavigationItem?.title = title
+        
+        guard let url = webView.request?.url else {
+            update(navBardWith: [backBarItem, doneBarItem])
+            hideLoadingIndicator()
+            return
+        }
+        
+        let host = url.host
+        let path = url.path
+        
+        if host?.contains(PeanutLabsConfig.domain) == true {
+            if path == "/userGreeting.php" {
+                update(navBardWith: [backBarItem, doneBarItem])
+            } else {
+                update(navBardWith: [rewardCenterBarItem])
+            }
+        } else {
+            updateNavBarHeight(shouldHide: false)
+            update(navBardWith: [backBarItem, forwardBarItem, rewardCenterBarItem])
+        }
+
+        backBarItem.barItem.isEnabled = webView.canGoBack
+        forwardBarItem.barItem.isEnabled = webView.canGoForward
+        
         hideLoadingIndicator()
     }
     
