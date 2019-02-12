@@ -18,8 +18,9 @@ public final class PeanutLabsContentViewController: UIViewController, PeanutLabs
         return true
     }
 
-    @IBOutlet var navigationBar: UINavigationBar?
-    @IBOutlet var webView: UIWebView?
+    @IBOutlet weak var customNavigationItem: UINavigationItem?
+    @IBOutlet weak var navigationBar: UINavigationBar?
+    @IBOutlet weak var webView: UIWebView?
     @IBOutlet weak var navbarHeightConstraint: NSLayoutConstraint?
 
     @IBOutlet var activityView: UIView?
@@ -121,7 +122,7 @@ private extension PeanutLabsContentViewController {
     }
     
     private func update(navBardWith items: [PeanutLabsBarItem]) {
-        
+        // TODO: add items to 'customNavigationItem' (ex : customNavigationItem?.leftBarButtonItem = items)
     }
     
     private func updateNavBarHeight(shouldHide: Bool) {

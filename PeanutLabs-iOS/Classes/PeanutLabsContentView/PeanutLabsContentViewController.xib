@@ -14,6 +14,7 @@
             <connections>
                 <outlet property="activityIndicator" destination="WtC-wM-DJF" id="jl3-0N-Frq"/>
                 <outlet property="activityView" destination="OZl-4M-VTZ" id="bji-Cv-i2f"/>
+                <outlet property="customNavigationItem" destination="zID-rB-Hxq" id="d5Z-Rl-Wrm"/>
                 <outlet property="navbarHeightConstraint" destination="9NS-Yf-oKC" id="cao-bt-opV"/>
                 <outlet property="navigationBar" destination="fty-9b-ouH" id="f8y-yk-rjK"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -32,7 +33,7 @@
                         <constraint firstAttribute="height" constant="44" id="9NS-Yf-oKC"/>
                     </constraints>
                     <items>
-                        <navigationItem title="Peanut Labs" id="gGu-nN-4Iw"/>
+                        <navigationItem title="Peanut Labs" id="zID-rB-Hxq"/>
                     </items>
                 </navigationBar>
                 <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NP1-sP-e3u">
