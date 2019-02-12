@@ -32,6 +32,13 @@ public final class PeanutLabsContentViewController: UIViewController, PeanutLabs
         return PeanutLabsBarItem(barItem: btn, position: .left, ordinal: 1)
     }()
     
+    private lazy var arrowBarItem: PeanutLabsBarItem = {
+        let btn = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.init(rawValue: 105) ?? .rewind,
+                                  target: nil,
+                                  action: #selector(onDoneButton))
+        return PeanutLabsBarItem(barItem: btn, position: .left, ordinal: 0)
+    }()
+    
     private lazy var backBarItem: PeanutLabsBarItem = {
         let btn = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.init(rawValue: 105) ?? .rewind,
                                   target: nil,
@@ -185,7 +192,7 @@ extension PeanutLabsContentViewController: UIWebViewDelegate {
         
         if host?.contains(PeanutLabsConfig.domain) == true {
             if path == "/userGreeting.php" {
-                update(navBardWith: [backBarItem, doneBarItem])
+                update(navBardWith: [arrowBarItem, doneBarItem])
             } else {
                 update(navBardWith: [rewardCenterBarItem])
             }
@@ -202,6 +209,9 @@ extension PeanutLabsContentViewController: UIWebViewDelegate {
     
     public func webView(_ webView: UIWebView, didFailLoadWithError error: Error) {
         logger.log(message: "\(#function)", for: .debug)
+        
+        update(navBardWith: [arrowBarItem, doneBarItem])
+        
         hideLoadingIndicator()
     }
     
