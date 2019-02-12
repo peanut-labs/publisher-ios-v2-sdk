@@ -30,7 +30,7 @@ internal extension PeanutLabsWebNavigationProtocol {
         
         if fragments.contains(url.fragment ?? "unknown") {
             fragment = url.fragment
-            return (shouldShowLoadingIndicator: false, shouldShowNavBar: true, result: false)
+            return (shouldShowLoadingIndicator: false, shouldShowNavBar: false, result: false)
         }
         
         if url.fragment ?? "" == "close" {
