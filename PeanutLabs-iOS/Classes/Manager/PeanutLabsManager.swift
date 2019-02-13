@@ -38,6 +38,7 @@ public final class PeanutLabsManager {
     private var customVariables: [String: String] = [:]
     
     private var config: PeanutLabsConfig?
+    private weak var presentingViewController: UIViewController?
     
     /** mm-dd-yyyy (ex: 02-05-2019) **/
     public var dob: String?
@@ -160,6 +161,7 @@ public final class PeanutLabsManager {
             return
         }
         
+        self.presentingViewController = viewController
         self.delegate = delegate
         
         let rewardsCenter = PeanutLabsContentViewController(manager: self, navigationDelegate: self)
@@ -180,10 +182,10 @@ extension PeanutLabsManager: PeanutLabsContentViewNavigationDelegate {
     }
     
     func handleFailure(error: PeanutLabsErrors) {
-        
+        delegate?.peanutLabsManager(faliedWith: error)
     }
     
     func onDone() {
-        
+        presentingViewController?.dismiss(animated: true)
     }
 }
