@@ -7,7 +7,9 @@
 
 import UIKit
 
-public final class PeanutLabsManager {
+@objc(PeanutLabsManager)
+@objcMembers
+public final class PeanutLabsManager: NSObject {
     
     public enum Gender {
         case male
@@ -129,7 +131,7 @@ public final class PeanutLabsManager {
         - varaiable: The custom variable(value) to add to the URL, String must not be nill
         - key: The key for the custom variable to be used for storage and variable name in URL
     **/
-    public func add(customVariable variable: String, forKey key: String) {
+    @objc public func add(customVariable variable: String, forKey key: String) {
         customVariables[key] = variable
     }
     
@@ -141,7 +143,7 @@ public final class PeanutLabsManager {
         self.config = config
     }
     
-    public func presentRewardsCenterOnRoot(with delegate: PeanutLabsManagerDelegate?) {
+    @objc public func presentRewardsCenterOnRoot(with delegate: PeanutLabsManagerDelegate?) {
         guard let rootViewController = UIApplication.shared.keyWindow?.rootViewController else {
             delegate?.peanutLabsManager(faliedWith: .noRootViewToPresentOn)
             return
@@ -154,7 +156,7 @@ public final class PeanutLabsManager {
         }
     }
     
-    public func presentRewardsCenter(on viewController: UIViewController, with delegate: PeanutLabsManagerDelegate?) {
+    @objc public func presentRewardsCenter(on viewController: UIViewController, with delegate: PeanutLabsManagerDelegate?) {
         
         guard let introURL = self.introURL else {
             delegate?.peanutLabsManager(faliedWith: .sdkNotInitialized)
@@ -178,6 +180,7 @@ extension PeanutLabsManager: PeanutLabsContentViewNavigationDelegate {
     func rewardsCenterDidClose() {
         userId = nil
         delegate?.rewardsCenterDidClose()
+        presentingViewController?.dismiss(animated: true)
         delegate = nil
     }
     
@@ -185,7 +188,4 @@ extension PeanutLabsManager: PeanutLabsContentViewNavigationDelegate {
         delegate?.peanutLabsManager(faliedWith: error)
     }
     
-    func onDone() {
-        presentingViewController?.dismiss(animated: true)
-    }
 }

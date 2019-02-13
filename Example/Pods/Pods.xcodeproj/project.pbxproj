@@ -57,6 +57,7 @@
 		07C245CB220B64CF00D4C1C9 /* String+MD5.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+MD5.swift"; sourceTree = "<group>"; };
 		07C245E7220C963B00D4C1C9 /* PeanutLabsConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeanutLabsConfig.swift; sourceTree = "<group>"; };
 		07C245E9220C97EE00D4C1C9 /* PeanutLabsErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeanutLabsErrors.swift; sourceTree = "<group>"; };
+		07C2461222149EF400D4C1C9 /* PeanutLabs-iOS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PeanutLabs-iOS.h"; sourceTree = "<group>"; };
 		0C5BB006B4179ACEEAC7A5F9B822D66C /* Pods-PeanutLabs-iOS_Tests-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-PeanutLabs-iOS_Tests-resources.sh"; sourceTree = "<group>"; };
 		13C26BD0573DDEC27EF12523E865FD9C /* Pods-PeanutLabs-iOS_Tests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-PeanutLabs-iOS_Tests-acknowledgements.markdown"; sourceTree = "<group>"; };
 		1DD2E3A049DAA1B3C46E3035231B54A2 /* Pods-PeanutLabs-iOS_Example.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-PeanutLabs-iOS_Example.modulemap"; sourceTree = "<group>"; };
@@ -151,6 +152,7 @@
 				07C245C1220B64CF00D4C1C9 /* PeanutLabsContentView */,
 				07C245C6220B64CF00D4C1C9 /* Manager */,
 				07C245C9220B64CF00D4C1C9 /* PeanutLabsUtils */,
+				07C2461222149EF400D4C1C9 /* PeanutLabs-iOS.h */,
 			);
 			name = Classes;
 			path = "PeanutLabs-iOS/Classes";
@@ -528,6 +530,8 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_INSTALL_OBJC_HEADER = YES;
+				SWIFT_OBJC_INTERFACE_HEADER_NAME = "$(SWIFT_MODULE_NAME).h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -757,6 +761,8 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_INSTALL_OBJC_HEADER = YES;
+				SWIFT_OBJC_INTERFACE_HEADER_NAME = "$(SWIFT_MODULE_NAME).h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";

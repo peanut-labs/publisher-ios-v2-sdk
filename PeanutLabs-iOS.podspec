@@ -29,7 +29,7 @@ Pod::Spec.new do |s|
   s.ios.deployment_target = '11.0'
   s.swift_version = '4.2'
 
-  s.source_files = 'PeanutLabs-iOS/**/*.{swift}'
+  s.source_files = 'PeanutLabs-iOS/**/*.{swift,h,xib}'
   
   # s.resource_bundles = {
   #   'PeanutLabs-iOS' => ['PeanutLabs-iOS/Assets/*.png']

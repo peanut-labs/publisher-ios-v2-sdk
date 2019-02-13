@@ -7,7 +7,8 @@
 
 import Foundation
 
-public enum PeanutLabsErrors: Error {
+@objc(PeanutLabsErrors)
+public enum PeanutLabsErrors: Int {
     case sdkNotInitialized
     case noRootViewToPresentOn
     case internalUrlGeneration

@@ -9,11 +9,10 @@ import UIKit
 
 internal protocol PeanutLabsContentViewNavigationDelegate: AnyObject {
     func rewardsCenterDidClose()
-    func onDone()
     func handleFailure(error: PeanutLabsErrors)
 }
 
-public final class PeanutLabsContentViewController: UIViewController, PeanutLabsWebNavigationProtocol {
+internal final class PeanutLabsContentViewController: UIViewController, PeanutLabsWebNavigationProtocol {
     
     public override var prefersStatusBarHidden: Bool {
         return true
@@ -145,7 +144,7 @@ private extension PeanutLabsContentViewController {
     }
     
     @objc private func onDoneButton() {
-        self.navigationDelegate?.onDone()
+        self.navigationDelegate?.rewardsCenterDidClose()
     }
     
     @objc private func onRewardCenterButton() {

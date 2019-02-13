@@ -7,6 +7,7 @@
 
 import Foundation
 
+@objc(PeanutLabsManagerDelegate)
 public protocol PeanutLabsManagerDelegate: AnyObject {
     func rewardsCenterDidOpen()
     func rewardsCenterDidClose()

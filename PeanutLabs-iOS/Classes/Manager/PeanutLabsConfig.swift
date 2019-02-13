@@ -29,7 +29,8 @@ public struct PeanutLabsConfig {
     
 }
 
-@objc public class PeanutLabsConfigWrapper: NSObject {
+@objc(PeanutLabsConfig)
+public class PeanutLabsConfigWrapper: NSObject {
     
     internal let config: PeanutLabsConfig
     
