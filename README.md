@@ -22,7 +22,8 @@ pod 'PeanutLabs-iOS'
 
 ## Author
 
-WinkowskiKonrad, konrad.winkowski@surveysampling.com
+Konrad Winkowski, konrad.winkowski@dynata.com
+Derek Mordarski, derek.mordarski@dynata.com
 
 ## License
 
