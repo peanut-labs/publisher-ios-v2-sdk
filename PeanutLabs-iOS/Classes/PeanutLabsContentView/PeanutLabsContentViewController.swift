@@ -149,6 +149,7 @@ private extension PeanutLabsContentViewController {
     
     @objc private func onRewardCenterButton() {
         guard let introUrl = baseUrl else {
+            navigationDelegate?.handleFailure(error: .internalUrlGeneration)
             return
         }
         loadPage(with: introUrl)
@@ -183,6 +184,7 @@ extension PeanutLabsContentViewController: UIWebViewDelegate {
         guard let url = webView.request?.url else {
             update(navBardWith: [backBarItem, doneBarItem])
             hideLoadingIndicator()
+            navigationDelegate?.handleFailure(error: .internalUrlGeneration)
             return
         }
         
