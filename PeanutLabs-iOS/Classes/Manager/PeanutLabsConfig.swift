@@ -18,9 +18,9 @@ public struct PeanutLabsConfig {
     internal let appId: Int
     internal let appKey: String
     internal let endUserId: String
-    internal let programId: String
+    internal let programId: String?
     
-    public init(appId: Int, appKey: String, endUserId: String, programId: String) {
+    public init(appId: Int, appKey: String, endUserId: String, programId: String? = nil) {
         self.appId = appId
         self.appKey = appKey
         self.endUserId = endUserId
@@ -34,7 +34,7 @@ public class PeanutLabsConfigWrapper: NSObject {
     
     internal let config: PeanutLabsConfig
     
-    @objc public init(appId: Int, appKey: String, endUserId: String, programId: String) {
+    @objc public init(appId: Int, appKey: String, endUserId: String, programId: String? = nil) {
         self.config = PeanutLabsConfig(appId: appId, appKey: appKey, endUserId: endUserId, programId: programId)
     }
     
