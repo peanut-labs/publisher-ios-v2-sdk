@@ -25,7 +25,7 @@ Pod::Spec.new do |s|
   s.author           = { 'Konrad Winkowski' => 'konrad.winkowski@dynata.com',
                          'Derek Mordarski' => 'derek.mordarski@dynata.com'
   }
-  s.source           = { :git => 'https://github.com/peanut-labs/publisher-ios-v2-sdk', :tag => s.version.to_s }
+  s.source           = { :git => 'https://github.com/peanut-labs/publisher-ios-v2-sdk.git', :tag => s.version.to_s }
 
   s.ios.deployment_target = '8.0'
   s.swift_version = '4.2'
