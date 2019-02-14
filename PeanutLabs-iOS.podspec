@@ -19,13 +19,13 @@ Pod::Spec.new do |s|
 
   s.description      = 'Pod handles setting up and loading surveys on a custom view'
 
-  s.homepage         = 'https://github.com/peanut-labs/publisher-ios-sdk'
+  s.homepage         = 'https://github.com/peanut-labs/publisher-ios-v2-sdk'
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'Konrad Winkowski' => 'konrad.winkowski@dynata.com',
                          'Derek Mordarski' => 'derek.mordarski@dynata.com'
   }
-  s.source           = { :git => 'https://github.com/peanut-labs/publisher-ios-sdk.git', :tag => s.version.to_s }
+  s.source           = { :git => 'https://github.com/peanut-labs/publisher-ios-v2-sdk', :tag => s.version.to_s }
 
   s.ios.deployment_target = '8.0'
   s.swift_version = '4.2'
