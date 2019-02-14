@@ -19,7 +19,7 @@ Pod::Spec.new do |s|
 
   s.description      = 'Pod handles setting up and loading surveys on a custom view'
 
-  s.homepage         = 'https://github.com/peanut-labs/publisher-ios-v2-sdk'
+  s.homepage         = 'https://peanut-labs.github.io/publisher-doc/#/intro'
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'Konrad Winkowski' => 'konrad.winkowski@dynata.com',
