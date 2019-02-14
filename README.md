@@ -78,7 +78,7 @@ func application(_ application: UIApplication, didFinishLaunchingWithOptions lau
     let config = PeanutLabsConfig(appId: 'your app Id', appKey: 'your app key',
                                   endUserId: 'unique end user id', programId: 'program id (can be nil)')
                               
-    # set isDebug to true if you want to get logs from the SDK
+    // set isDebug to true if you want to get logs from the SDK
     PeanutLabsManager.default.isDebug = true                              
 
     PeanutLabsManager.default.initialize(with: config)
