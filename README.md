@@ -25,7 +25,7 @@ pod 'PeanutLabs-iOS'
 
 Peanut Labs connects your users with thousands of paid online surveys from big brands and market researchers. This SDK allows you to integrate our Reward Center within your iOS application. 
 
-#The Reward Center
+# The Reward Center
 
 The Reward Center lists surveys and offers best suited for each of your members. It is highly customizable and positively engaging.
 
@@ -33,11 +33,11 @@ You get paid whenever your members complete a listing, and get to reward them ba
 
 All of this and much more is configured  and monitored through our Publisher Dashboard. To learn more and get access to our full set of tools, get in touch with us at publisher.integration@peanutlabs.com
 
-#Integration
+# Integration
 
 Check out <a href="http://peanut-labs.github.io/publisher-doc/" target="_blank">our integration guide</a> for step by step instructions on getting up and running with our Reward Center within your iOS application.
 
-#Changelog
+# Changelog
 
 v2.0
 - Code redesigned using swift and cocopod
@@ -69,9 +69,9 @@ v0.2
 - Always generate new user Id if the user switches account
 - Support for all orientations on the iPhone
 
-*    Initialize SDK
+## Initialize SDK
 
-- If you are using the 'default' SDK manager, we reccomend initializing the sdk in the applications 'didFinishLaunchingWithOptions' 
+**If you are using the 'default' SDK manager, we reccomend initializing the sdk in the applications 'didFinishLaunchingWithOptions'**
 
 ``` Swift
 func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
@@ -108,9 +108,9 @@ return YES;
 
 ```
 
-*    Open Rewards Center.
+### Open Rewards Center.
 
-- If you want to control which view controller the rewards center is presented on use:
+**If you want to control which view controller the rewards center is presented on use:**
 
 ``` Swift
 PeanutLabsManager.default.presentRewardsCenter(on: self, with: self)
@@ -120,7 +120,7 @@ PeanutLabsManager.default.presentRewardsCenter(on: self, with: self)
 [[PeanutLabsManager default] presentRewardsCenterOn:self with:self];
 ```
 
-- If you want to present the rewards center just on top of your application use:
+**If you want to present the rewards center just on top of your application use:**
 
 ``` Swift
 PeanutLabsManager.default.presentRewardsCenterOnRoot(with: self)
@@ -130,7 +130,7 @@ PeanutLabsManager.default.presentRewardsCenterOnRoot(with: self)
 [[PeanutLabsManager default] presentRewardsCenterOnRootWith:self];
 ```
 
-* Add dob and gender as a parameter
+### Add dob and gender as a parameter
 
 ``` Swift
 Setting Dob // MM-DD-YYYY
@@ -148,7 +148,7 @@ Setting Dob // MM-DD-YYYY
 [[PeanutLabsManager default] setDob:@"MM-DD-YYYY"];
 ```
 
-* Adding a custom parameter
+### Adding a custom parameter
 
 ``` Swift
 PeanutLabsManager.default.add(customVariable: "YOUR VALUE", forKey: "YOUR KEY")
