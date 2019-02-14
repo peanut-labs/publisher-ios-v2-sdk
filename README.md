@@ -96,7 +96,7 @@ func application(_ application: UIApplication, didFinishLaunchingWithOptions lau
     endUserId:'unique end user id'
     programId:'program id (can be nil)'];
 
-    # set isDebug to true if you want to get logs from the SDK
+    // set isDebug to true if you want to get logs from the SDK
     [plManager setIsDebug:true];
 
     [plManager initializeWith:config];
