@@ -7,24 +7,24 @@
 
 import UIKit
 
+@objc(PeanutLabsGender)
+public enum PeanutLabsGender: Int {
+    case male
+    case female
+    
+    internal var paramValue: String {
+        switch self {
+        case .male:
+            return "1"
+        case .female:
+            return "2"
+        }
+    }
+}
+
 @objc(PeanutLabsManager)
 @objcMembers
 public final class PeanutLabsManager: NSObject {
-    
-    public enum Gender {
-        case male
-        case female
-        
-        internal var paramValue: String {
-            switch self {
-            case .male:
-                return "1"
-            case .female:
-                return "2"
-            }
-        }
-    }
-    
     /**
      The default singleton of the PeanutLabsManager. You can use this to quickly setup the manager and display the content.
      Before calling to present the content view you must set the following paramaters [appId, appKey, endUserId, programId]
@@ -45,7 +45,7 @@ public final class PeanutLabsManager: NSObject {
     /** mm-dd-yyyy (ex: 02-05-2019) **/
     public var dob: String?
     /** Use PeanutLabsManager.Gender **/
-    public var gender: PeanutLabsManager.Gender?
+    public var gender: PeanutLabsGender?
     /** An alphanumberic value **/
     internal var publisherName: String?
     
@@ -92,7 +92,7 @@ public final class PeanutLabsManager: NSObject {
         return params
     }
     
-    internal lazy var userId: String? = {
+    internal var userId: String? {
         guard let endUserId = config?.endUserId, let appId = config?.appId, let appKey = config?.appKey else {
             logger.log(message: """
                         Failed to get 'userId' because one of these required values was not provided
@@ -106,10 +106,9 @@ public final class PeanutLabsManager: NSObject {
         let generatedUserId = "\(endUserId)-\(appId)-\("\(endUserId)\(appId)\(appKey)".md5.prefix(10))"
         
         return generatedUserId
-    }()
+    }
     
-    internal var introURL: URL? {
-        guard let userId = self.userId else {
+    internal var introURL: URL? {        guard let userId = self.userId else {
             return nil
         }
         var urlStr = "http://\(PeanutLabsConfig.domain)/userGreeting.php?userId=\(userId)&mobile_sdk=true&ref=ios_sdk"
@@ -137,6 +136,10 @@ public final class PeanutLabsManager: NSObject {
     
     @objc public func initialize(with config: PeanutLabsConfigWrapper) {
         initialize(with: config.config)
+    }
+    
+    @objc public func setGender(gender: PeanutLabsGender) {
+        self.gender = gender
     }
     
     public func initialize(with config: PeanutLabsConfig) {
@@ -178,7 +181,6 @@ public final class PeanutLabsManager: NSObject {
 
 extension PeanutLabsManager: PeanutLabsContentViewNavigationDelegate {
     func rewardsCenterDidClose() {
-        userId = nil
         delegate?.rewardsCenterDidClose()
         presentingViewController?.dismiss(animated: true)
         delegate = nil
