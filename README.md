@@ -75,35 +75,33 @@ v0.2
 
 ``` Swift
 func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+    let config = PeanutLabsConfig(appId: 'your app Id', appKey: 'your app key',
+                                  endUserId: 'unique end user id', programId: 'program id (can be nil)')
+                              
+    # set isDebug to true if you want to get logs from the SDK
+    PeanutLabsManager.default.isDebug = true                              
 
-PeanutLabsManager.default.initialize(with: PeanutLabsConfig(appId: 'your app Id',
-appKey: 'your app key',
-endUserId: 'unique end user id',
-programId: 'program id (can be nil)'))
+    PeanutLabsManager.default.initialize(with: config)
 
-# set isDebug to true if you want to get logs from the SDK
-PeanutLabsManager.default.isDebug = true
-
-return true
+    return true
 }
 ```
 
 ``` Objective-c
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    PeanutLabsManager *plManager = [PeanutLabsManager default];
+    PeanutLabsConfig *config = [[PeanutLabsConfig alloc] initWithAppId:'your app id'
+    appKey:'your app key'
+    endUserId:'unique end user id'
+    programId:'program id (can be nil)'];
 
-PeanutLabsManager *plManager = [PeanutLabsManager default];
-PeanutLabsConfig *config = [[PeanutLabsConfig alloc] initWithAppId:'your app id'
-appKey:'your app key'
-endUserId:'unique end user id'
-programId:'program id (can be nil)'];
+    # set isDebug to true if you want to get logs from the SDK
+    [plManager setIsDebug:true];
 
-# set isDebug to true if you want to get logs from the SDK
-[plManager setIsDebug:true];
+    [plManager initializeWith:config];
 
-[plManager initializeWith:config];
-
-return YES;
+    return YES;
 }
 
 ```
