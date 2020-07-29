@@ -27,7 +27,7 @@ Pod::Spec.new do |s|
   }
   s.source           = { :git => 'https://github.com/peanut-labs/publisher-ios-v2-sdk', :tag => s.version.to_s }
 
-  s.ios.deployment_target = '8.0'
+  s.ios.deployment_target = '11.0'
   s.swift_version = '4.2'
 
   s.source_files = 'PeanutLabs-iOS/**/*.{swift,h,xib}'

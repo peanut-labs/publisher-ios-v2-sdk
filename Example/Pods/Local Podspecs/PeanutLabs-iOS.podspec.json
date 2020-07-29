@@ -1,22 +1,25 @@
 {
   "name": "PeanutLabs-iOS",
-  "version": "0.1.0",
-  "summary": "A short description of PeanutLabs-iOS.",
-  "description": "TODO: Add long description of the pod here.",
-  "homepage": "https://github.com/WinkowskiKonrad/PeanutLabs-iOS",
+  "version": "1.0.0",
+  "summary": "PeanutLabs iOS SDK pod",
+  "description": "Pod handles setting up and loading surveys on a custom view",
+  "homepage": "https://github.com/peanut-labs/publisher-ios-v2-sdk",
   "license": {
     "type": "MIT",
     "file": "LICENSE"
   },
   "authors": {
-    "WinkowskiKonrad": "konrad.winkowski@surveysampling.com"
+    "Konrad Winkowski": "konrad.winkowski@dynata.com",
+    "Derek Mordarski": "derek.mordarski@dynata.com"
   },
   "source": {
-    "git": "https://github.com/WinkowskiKonrad/PeanutLabs-iOS.git",
-    "tag": "0.1.0"
+    "git": "https://github.com/peanut-labs/publisher-ios-v2-sdk",
+    "tag": "1.0.0"
   },
   "platforms": {
-    "ios": "8.0"
+    "ios": "11.0"
   },
-  "source_files": "PeanutLabs-iOS/Classes/**/*"
+  "swift_versions": "4.2",
+  "source_files": "PeanutLabs-iOS/**/*.{swift,h,xib}",
+  "swift_version": "4.2"
 }

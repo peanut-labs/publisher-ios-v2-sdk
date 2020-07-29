@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import WebKit
 
 internal protocol PeanutLabsContentViewNavigationDelegate: AnyObject {
     func rewardsCenterDidClose()
@@ -20,7 +21,9 @@ internal final class PeanutLabsContentViewController: UIViewController, PeanutLa
 
     @IBOutlet weak var customNavigationItem: UINavigationItem?
     @IBOutlet weak var navigationBar: UINavigationBar?
-    @IBOutlet weak var webView: UIWebView?
+//    @IBOutlet weak var webView: UIWebView?
+    
+    @IBOutlet weak var webView: WKWebView!
     @IBOutlet weak var navbarHeightConstraint: NSLayoutConstraint?
 
     @IBOutlet var activityView: UIView?
@@ -60,7 +63,9 @@ internal final class PeanutLabsContentViewController: UIViewController, PeanutLa
     }()
     
     internal lazy var fragments: [String] = {
-        return ["offer", "survey", "open"]
+        return ["offer",
+                "survey",
+                "open"]
     }()
     
     internal var logger: PeanutLabsLogger {
@@ -88,11 +93,13 @@ internal final class PeanutLabsContentViewController: UIViewController, PeanutLa
     override public func viewDidLoad() {
         super.viewDidLoad()
         activityView?.layer.cornerRadius = 5.0
-        webView?.delegate = self
+//        webView?.delegate = self
+        webView?.navigationDelegate = self
     }
     
     internal func loadPage(with url: URL) {
-        webView?.loadRequest(URLRequest(url: url))
+//        webView?.loadRequest(URLRequest(url: url))
+        webView?.load(URLRequest(url: url))
     }
     
     func handleDecidePolicyForFailure(error: PeanutLabsErrors) {
@@ -237,7 +244,7 @@ extension PeanutLabsContentViewController: UIWebViewDelegate {
 /**
  Temp removed and switch to UIWebView due to CORS issue with WKWebView
  **/
-/*
+
 extension PeanutLabsContentViewController: WKNavigationDelegate {
     
     public func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
@@ -275,4 +282,4 @@ extension PeanutLabsContentViewController: WKNavigationDelegate {
         PeanutLabsLogger.default.log(message: "didStartProvisionalNavigation", for: .debug)
     }
 }
-*/
+

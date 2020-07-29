@@ -10,6 +10,7 @@
 #endif
 #endif
 
+#import "PeanutLabs-iOS.h"
 
 FOUNDATION_EXPORT double PeanutLabs_iOSVersionNumber;
 FOUNDATION_EXPORT const unsigned char PeanutLabs_iOSVersionString[];

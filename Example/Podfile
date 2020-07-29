@@ -1,3 +1,9 @@
+platform :ios, '11.0'
+
+#TODO: create podspec repo or add to mobile-ios-podspecs
+#source 'git@github.com:surveysampling/mobile-ios-podspecs'
+source 'https://github.com/CocoaPods/Specs.git'
+
 use_frameworks!
 
 target 'PeanutLabs-iOS_Example' do
