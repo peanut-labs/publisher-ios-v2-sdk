@@ -241,13 +241,19 @@ extension PeanutLabsContentViewController: UIWebViewDelegate {
     
 }
 
-/**
- Temp removed and switch to UIWebView due to CORS issue with WKWebView
- **/
 
 extension PeanutLabsContentViewController: WKNavigationDelegate {
     
     public func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+        
+        // Fix for WKWebView ignoring window.open requests in JS
+        webView.evaluateJavaScript("""
+            window.open = function(open) {
+                return function (url, name, features) {
+                    window.location.href = url;
+                    return window;
+                }; } (window.open);
+            """, completionHandler: nil)
         
         PeanutLabsLogger.default.log(message: "decidePolicyFor", for: .debug)
   
