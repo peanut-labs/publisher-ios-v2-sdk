@@ -273,6 +273,38 @@ extension PeanutLabsContentViewController: WKNavigationDelegate {
     public func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         PeanutLabsLogger.default.log(message: "didFinish", for: .debug)
         
+        var title = PeanutLabsConfig.title
+        
+        if fragment == "offer" || fragment == "survey" {
+            title = fragment?.capitalized ?? ""
+        }
+        
+        customNavigationItem?.title = title
+        
+        guard let url = webView.url else {
+            update(navBardWith: [backBarItem, doneBarItem])
+            hideLoadingIndicator()
+            navigationDelegate?.handleFailure(error: .internalUrlGeneration)
+            return
+        }
+        
+        let host = url.host
+        let path = url.path
+        
+        if host?.contains(PeanutLabsConfig.domain) == true {
+            if path == "/userGreeting.php" {
+                update(navBardWith: [arrowBarItem, doneBarItem])
+            } else {
+                update(navBardWith: [rewardCenterBarItem])
+            }
+        } else {
+            updateNavBarHeight(shouldHide: false)
+            update(navBardWith: [backBarItem, forwardBarItem, rewardCenterBarItem])
+        }
+
+        backBarItem.barItem.isEnabled = webView.canGoBack
+        forwardBarItem.barItem.isEnabled = webView.canGoForward
+        
         hideLoadingIndicator()
         
     }
