@@ -21,7 +21,6 @@ internal final class PeanutLabsContentViewController: UIViewController, PeanutLa
 
     @IBOutlet weak var customNavigationItem: UINavigationItem?
     @IBOutlet weak var navigationBar: UINavigationBar?
-//    @IBOutlet weak var webView: UIWebView?
     
     @IBOutlet weak var webView: WKWebView!
     @IBOutlet weak var navbarHeightConstraint: NSLayoutConstraint?
@@ -172,76 +171,6 @@ private extension PeanutLabsContentViewController {
     }
 }
 
-extension PeanutLabsContentViewController: UIWebViewDelegate {
-    
-    public func webViewDidStartLoad(_ webView: UIWebView) {
-        logger.log(message: "\(#function)", for: .debug)
-    }
-    
-    public func webViewDidFinishLoad(_ webView: UIWebView) {
-        logger.log(message: "\(#function)", for: .debug)
-        
-        var title = PeanutLabsConfig.title
-        
-        if fragment == "offer" || fragment == "survey" {
-            title = fragment?.capitalized ?? ""
-        }
-        
-        customNavigationItem?.title = title
-        
-        guard let url = webView.request?.url else {
-            update(navBardWith: [backBarItem, doneBarItem])
-            hideLoadingIndicator()
-            navigationDelegate?.handleFailure(error: .internalUrlGeneration)
-            return
-        }
-        
-        let host = url.host
-        let path = url.path
-        
-        if host?.contains(PeanutLabsConfig.domain) == true {
-            if path == "/userGreeting.php" {
-                update(navBardWith: [arrowBarItem, doneBarItem])
-            } else {
-                update(navBardWith: [rewardCenterBarItem])
-            }
-        } else {
-            updateNavBarHeight(shouldHide: false)
-            update(navBardWith: [backBarItem, forwardBarItem, rewardCenterBarItem])
-        }
-
-        backBarItem.barItem.isEnabled = webView.canGoBack
-        forwardBarItem.barItem.isEnabled = webView.canGoForward
-        
-        hideLoadingIndicator()
-    }
-    
-    public func webView(_ webView: UIWebView, didFailLoadWithError error: Error) {
-        logger.log(message: "\(#function)", for: .debug)
-        
-        update(navBardWith: [arrowBarItem, doneBarItem])
-        
-        hideLoadingIndicator()
-    }
-    
-    public func webView(_ webView: UIWebView, shouldStartLoadWith request: URLRequest, navigationType: UIWebView.NavigationType) -> Bool {
-        logger.log(message: "\(#function)", for: .debug)
-        
-        let results = decidePolicyFor(webView: webView, request: request)
-        
-        if results.shouldShowLoadingIndicator == true {
-            showLoadingIndicator()
-        }
-        
-        if let shouldShowNavBar = results.shouldShowNavBar {
-            updateNavBarHeight(shouldHide: !shouldShowNavBar)
-        }
-        
-        return results.result
-    }
-    
-}
-
 
 extension PeanutLabsContentViewController: WKNavigationDelegate {
     
@@ -276,9 +205,10 @@ extension PeanutLabsContentViewController: WKNavigationDelegate {
         
         let title = PeanutLabsConfig.title
 
-        // Commenting this out, fragments are persisting and causing
-        // the nav bar title to permanently change to Survey even
-        // after closing, might as well just leave it "Peanut Labs"
+//        Commenting this out, the fragments are persisting and causing
+//        the nav bar title to permanently change to Survey even
+//        after closing, might as well just leave it as the PeanutLabsConfig
+//        title
 //        if fragment == "offer" || fragment == "survey" {
 //            title = fragment?.capitalized ?? ""
 //        }
