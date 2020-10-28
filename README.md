@@ -39,6 +39,10 @@ Check out <a href="http://peanut-labs.github.io/publisher-doc/" target="_blank">
 
 # Changelog
 
+v2.1 October 28, 2020
+- UIWebView replaced with WKWebView
+  * due to pending end of 2020 deprecation of UIWebView
+
 v2.0
 - Code redesigned using swift and cocopod
 
