@@ -71,6 +71,7 @@ internal final class PeanutLabsContentViewController: UIViewController, PeanutLa
     internal var logger: PeanutLabsLogger {
         return PeanutLabsLogger.default
     }
+    
     internal var fragment: String?
     internal var baseUrl: URL? {
         return manager?.introURL
@@ -273,11 +274,14 @@ extension PeanutLabsContentViewController: WKNavigationDelegate {
     public func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         PeanutLabsLogger.default.log(message: "didFinish", for: .debug)
         
-        var title = PeanutLabsConfig.title
-        
-        if fragment == "offer" || fragment == "survey" {
-            title = fragment?.capitalized ?? ""
-        }
+        let title = PeanutLabsConfig.title
+
+        // Commenting this out, fragments are persisting and causing
+        // the nav bar title to permanently change to Survey even
+        // after closing, might as well just leave it "Peanut Labs"
+//        if fragment == "offer" || fragment == "survey" {
+//            title = fragment?.capitalized ?? ""
+//        }
         
         customNavigationItem?.title = title
         
