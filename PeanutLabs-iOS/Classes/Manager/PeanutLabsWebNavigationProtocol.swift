@@ -20,54 +20,6 @@ internal protocol PeanutLabsWebNavigationProtocol: AnyObject {
 
 internal extension PeanutLabsWebNavigationProtocol {
     
-    func decidePolicyFor(webView: UIWebView, request: URLRequest) -> (shouldShowLoadingIndicator: Bool?, shouldShowNavBar: Bool?, result: Bool) {
-        
-        guard let url = request.url,
-            let hostStr = url.host,
-            hostStr.contains(PeanutLabsConfig.domain) else {
-                return (shouldShowLoadingIndicator: true, shouldShowNavBar: nil, result: true)
-        }
-        
-        if fragments.contains(url.fragment ?? "unknown") {
-            fragment = url.fragment
-            return (shouldShowLoadingIndicator: false, shouldShowNavBar: false, result: false)
-        }
-        
-        if url.fragment ?? "" == "close" {
-            fragment = nil
-            return (shouldShowLoadingIndicator: false, shouldShowNavBar: true, result: false)
-        }
-        
-        if url.lastPathComponent == "landingPage.php" {
-            return (shouldShowLoadingIndicator: true, shouldShowNavBar: false, result: true)
-        }
-        
-        if url.path == "/userGreeting.php" && url.query?.contains("mobile_sdk=true") == false {
-            let langCode = Locale.current.languageCode ?? ""
-            let zlLocale = "zl=\(langCode)"
-            var newUrl = baseUrl
-            
-            if !url.pathComponents.contains(zlLocale) {
-                newUrl?.appendPathComponent("mobile_sdk=true")
-                newUrl?.appendPathComponent("ref=ios_sdk")
-            }
-            
-            guard let unewUrl = newUrl else {
-                logger.log(message: "Invalid URL encountered", for: .error)
-                handleDecidePolicyForFailure(error: .internalUrlGeneration)
-                return (shouldShowLoadingIndicator: nil, shouldShowNavBar: nil, result: false)
-            }
-            
-            webView.loadRequest(URLRequest(url: unewUrl))
-            
-            return (shouldShowLoadingIndicator: false, shouldShowNavBar: true, result: false)
-            
-        }
-        
-        return (shouldShowLoadingIndicator: true, shouldShowNavBar: nil, result: true)
-        
-    }
-    
     func decidePolicyFor(webView: WKWebView, request: URLRequest) -> (shouldShowLoadingIndicator: Bool?, shouldShowNavBar: Bool?, policy: WKNavigationActionPolicy) {
         
         guard let url = request.url,
